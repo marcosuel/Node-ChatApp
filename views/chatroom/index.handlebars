@@ -1,0 +1,106 @@
+<div class="card mt-4">
+    <div class="card-body">
+        <div class="row">
+            <!-- Grid column -->
+            <div class="col">
+
+                <!-- Exaple 1 -->
+                <div class="card example-1 gray-box scrollbar-deep-green bordered-deep-green thin" id="scrollbar">
+                    <div class="card-body">
+                        <div class="messages">
+
+                        </div>
+                        
+                    </div>
+                </div>
+                <!-- Exaple 1 -->
+
+            </div>
+        </div>
+
+        <form action="/message/send" method="POST" id="chat">
+            <input type="hidden" name="room_id" value="{{room_id}}">
+            <input type="hidden"  name="user_id" value="{{user_id}}">
+            <input type="hidden"  name="username" value="{{username}}">
+
+            <textarea id="message" name="message" class="form-control mt-2" placeholder="Digite sua mensagem"></textarea>
+
+            <button type="submit" class="btn btn-success mt-2">Enviar</button>
+        </form>
+
+        <script>
+            var socket = io('http://localhost:8081/');
+            //var socket = io('http://0.tcp.sa.ngrok.io:10944/');
+
+            var roomNum = $("input[name=room_id]").val()
+            var userid = $("input[name=user_id]").val()
+            socket.emit('join', {room: roomNum, user: userid} )
+
+
+
+            function equals(v1, v2){
+                if(v1 == v2)
+                    return 'class="ml-auto message me mb-2 float-sm-right"'
+                return 'class=" message other mb-2 float-sm-left"'
+            }
+
+            $("#chat").submit(function(event){
+                event.preventDefault();
+
+                var message = $("textarea[name=message]").val()
+
+                if(message.length){
+                    
+                    var messageObject = {
+                        room_id: $('input[name="room_id"]').val(),
+                        author_id: $('input[name="user_id"]').val(),
+                        author: $('input[name="username"]').val(),
+                        message: message
+                    }
+
+                    renderMessage(messageObject)
+
+                    $.post("/message/send", $("#chat").serialize())
+                    socket.emit('sendMessage', messageObject)
+                    $('textarea[name="message"]').val('');
+
+                }
+
+            })
+
+            function renderMessage(message){
+
+                console.log(message.message)
+
+                var text = equals("{{user_id}}", message.author_id)
+                $('.messages').append({{>_message}})
+                $("#scrollbar").scrollTop($("#scrollbar")[0].scrollHeight);
+            }
+
+            socket.on('previousMessages', function(messages){
+                for(message of messages){
+                    renderMessage(message)
+                }
+            });
+
+            socket.on('receivedMessage', function(message){
+                renderMessage(message)
+            });
+
+
+            $('#message').keydown(function() {
+                var message = $("textarea[name=message]").val();
+                if (event.keyCode == 13) {
+                    if (message == "") {
+                        
+                    } else {
+                        $('#chat').submit();
+                    }
+                    $('textarea[name="message"]').val('');
+                    return false;
+                }
+            });
+        </script>
+
+    </div>
+</div>

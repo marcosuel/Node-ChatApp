@@ -1,0 +1,18 @@
+{{#each errs}}
+    <div class="alert alert-danger"> {{text}} </div>
+{{else}}
+{{/each}}
+
+<h3>Nova sala:</h3>
+<div class="card mt-4">
+    <div class="card-body">
+        <form action="/chatroom/new" method="POST">
+            <label for="name" >Nome: </label>
+            <input type="text" name="name" class="form-control" {{#if name}} value={{name}} {{/if}} required>
+            <label for="description">Descrição: </label>
+            <textarea name="description" class="form-control"></textarea>
+            <br>
+            <button type="submit" class="btn btn-success">Criar sala</button>
+        </form>
+    </div>
+</div> 

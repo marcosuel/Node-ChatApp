@@ -1,0 +1,65 @@
+.messages {
+    padding: 0px;
+    height: fit-content;
+}
+
+.clear {
+    clear:both;
+}
+
+.message {
+    padding: 5px 20px 5px 5px;
+    border-radius: 5px;
+    width: fit-content;
+    min-width: 90px;
+    max-width: 400px;
+}
+
+.text-message {
+    margin: 0;
+}
+
+.me {
+    background-color: #afffad;
+}
+
+.other {
+    background-color: #ffffff;
+}
+
+
+
+.scrollbar-deep-green::-webkit-scrollbar-track {
+-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+background-color: rgba(245, 245, 245, 0);
+border-radius: 10px; }
+
+.scrollbar-deep-green::-webkit-scrollbar {
+width: 12px;
+background-color: rgba(245, 245, 245, 0); }
+
+.scrollbar-deep-green::-webkit-scrollbar-thumb {
+border-radius: 10px;
+-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+background-color: #adadadc0; }
+
+
+.bordered-deep-green::-webkit-scrollbar-track {
+-webkit-box-shadow: none;
+border: 1px solid #b6b6b600; }
+
+.bordered-deep-green::-webkit-scrollbar-thumb {
+-webkit-box-shadow: none; }
+
+.thin::-webkit-scrollbar {
+width: 6px; }
+
+.example-1 {
+    position: relative;
+    overflow-y: scroll;
+    height: 300px; 
+}
+
+.gray-box {
+    background-color: #dfdfdf;
+}

@@ -1,0 +1,25 @@
+{{#each errs}}
+    <div class="alert alert-danger"> {{text}} </div>
+{{else}}
+{{/each}}
+
+<h3>Registre-se:</h3>
+<script>
+    console.log("{{name}}")
+</script>
+<div class="card mt-4">
+    <div class="card-body">
+        <form action="/user/register" method="POST">
+            <label for="name" >Nome: </label>
+            <input type="text" name="name" class="form-control" {{#if name}} value="{{name}}" {{/if}} required>
+            <label for="email">Email: </label>
+            <input type="email" name="email" class="form-control" {{#if email}} value={{email}} {{/if}} required>
+            <label for="password">Senha: </label>
+            <input type="password" name="password" class="form-control" required>
+            <label for="password2">Repita sua senha: </label>
+            <input type="password" name="password2" class="form-control" required>
+            <br>
+            <button type="submit" class="btn btn-success">Criar conta</button>
+        </form>
+    </div>
+</div> 

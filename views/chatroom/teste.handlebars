@@ -1,0 +1,54 @@
+<div class="card mt-4">
+    <div class="card-body">
+
+        <form action="/message/teste" method="POST" id="chat" >
+
+            <input type="text" name="room" placeholder="Nome da sala">
+            <textarea id="message" name="message" class="form-control mt-2" placeholder="Digite sua mensagem"></textarea>
+            <button type="submit" class="btn btn-success mt-2">Enviar</button>
+
+        </form>
+
+        <div class="msg-server">
+
+        </div>
+
+        <button id="join">Join room</button>
+        <button id="msg">get message</button>
+
+
+
+        <script>
+
+            var socket = io('localhost:8081/');
+
+
+
+            $("#chat").submit(function(event){
+                event.preventDefault();
+                $.post("/message/teste", $("#chat").serialize())
+            })
+
+            
+            $("#join").click(function(){
+                console.log("teste")
+                var roomNum = $("input[name=room]").val()
+                console.log(roomNum)
+                socket.emit('join', roomNum )
+            });
+
+            $("#msg").click(function(){
+                socket.emit('getRoomTeste', "")
+            });
+
+
+
+
+            socket.on('serverMsg', function(message){
+                console.log("recebeu msg do server")
+                $(".msg-server").append("aaaaaaa")
+            })
+        </script>
+
+    </div>
+</div>
