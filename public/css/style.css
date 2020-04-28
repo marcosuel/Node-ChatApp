@@ -63,3 +63,12 @@ width: 6px; }
 .gray-box {
     background-color: #dfdfdf;
 }
+
+.page-footer {
+    background-color: rgb(60, 60, 60);
+    height: 120px;
+}
+
+.white-text {
+    color: white;
+}

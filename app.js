@@ -73,7 +73,7 @@ const app = express();
     //  Routes
 
     app.get("/", checkAuthenticaded, (req, res) => {
-        res.render("chatroom/index", {user_id: req.user._id, username: req.user.name, room_id: "5ea49bdec95d5e26484a874d"})
+        res.render("index")
     })
 
     app.use('/user', user)

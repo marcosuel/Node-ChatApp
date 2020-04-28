@@ -1,7 +1,23 @@
 const mongoose = require("mongoose")
 const User = mongoose.model("users")
+const Chatroom = mongoose.model("chatrooms")
 const bcrypt = require('bcrypt')
 const passport = require('passport')
+
+
+
+
+exports.listRooms = (req, res) => {
+
+    Chatroom.find({members: req.user._id}).then((chatrooms) => {
+        res.render("chatroom/chatrooms", {chatrooms: chatrooms.map(chatrooms => chatrooms.toJSON())})
+    }).catch((err) => {
+        req.flash("error_msg", "Houve um erro ao carregar as salas.")
+        //muda isso no futuro para uma pag inicial
+        res.redirect("/")
+    })
+
+}
 
 exports.login = (req, res, next) => {
 
@@ -11,6 +27,14 @@ exports.login = (req, res, next) => {
         failureFlash: true
     })(req, res, next)
     
+}
+
+exports.logout = (req, res) => {
+
+    req.logout()
+    req.flash("success_msg", "Sessão encerrada")
+    res.redirect("/user/login")
+
 }
 
 exports.register = (req, res) => {
@@ -56,7 +80,7 @@ exports.register = (req, res) => {
                                 res.redirect("/user/login")
                             }).catch((err) => {
                                 req.flash("error_msg", "Houve um erro interno ao criar o usuário.")
-                                res.redirect("/user/register")
+                                res.redirect("/")
                             });
                         }
                     });

@@ -17,11 +17,12 @@ const userSchema = new Schema({
     isDeveloper: {
         type: Number,
         default: 0
-    }
-},
-    {
-        timestamps: true
-    }
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
+}
 );
 
 mongoose.model("users", userSchema)

@@ -1,25 +1,23 @@
 const express = require('express')
 const router = express.Router()
-const mongoose = require("mongoose")
 const userController = require("../controllers/userController")
+const {checkAuthenticaded} = require("../helpers/checkAuthenticaded")
+const {redirectUser} = require("../helpers/redirectUser")
 
-router.get("/login", (req, res) => {
+
+router.get("/login", redirectUser, (req, res) => {
     res.render("user/login")
 })
 
-router.get("/register", (req, res) => {
+router.get("/register", redirectUser,  (req, res) => {
     res.render("user/register")
 })
 
-router.get("/logout", (req, res) => {
 
-    req.logout()
-    req.flash("success_msg", "Sessão encerrada")
-    res.redirect("/")
+router.get("/logout", checkAuthenticaded, userController.logout)
+router.get("/chatrooms", checkAuthenticaded, userController.listRooms)
 
-})
-
-router.post("/login", userController.login)
-router.post("/register", userController.register)
+router.post("/login", redirectUser, userController.login)
+router.post("/register", redirectUser, userController.register)
 
 module.exports = router;

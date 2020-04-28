@@ -7,8 +7,9 @@
 <div class="card mt-4">
     <div class="card-body">
         <form action="/chatroom/new" method="POST">
+            <input type="hidden" name="user_id" value={{user_id}}>
             <label for="name" >Nome: </label>
-            <input type="text" name="name" class="form-control" {{#if name}} value={{name}} {{/if}} required>
+            <input type="text" name="name" class="form-control" {{#if name}} value="{{name}}"" {{/if}} required>
             <label for="description">Descrição: </label>
             <textarea name="description" class="form-control"></textarea>
             <br>

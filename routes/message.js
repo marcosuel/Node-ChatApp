@@ -5,6 +5,4 @@ const {checkAuthenticaded} = require("../helpers/checkAuthenticaded")
 
 router.post("/send", checkAuthenticaded, messageController.send)
 
-//router.post("/send", checkAuthenticaded, messageController.send)
-
 module.exports = router;

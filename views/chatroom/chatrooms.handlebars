@@ -1,0 +1,20 @@
+<h2>Suas salas: </h2>
+<br>
+{{#each chatrooms}}
+  <div class="card mt-4">
+    <div class="card-body">
+      <a href="/chatroom/in/{{_id}}"><h4>{{name}}</h4></a>
+      <p>{{description}}</p>
+      <!--  Não implementado ainda
+          <a href="/chatoom/delete/{{_id}}"><button class="btn btn-success">apagar</button></a> -->
+      <!--<small class="float-sm-right" style="color: gray;">Data de publicação: {{data}}</small> -->
+    </div>
+  </div>
+{{else}}
+  <hr>
+  Você não está em nenhuma sala, crie uma nova.
+  <hr>
+{{/each}}
+
+<a class="btn btn-success btn-block btn-sm mt-2" href="/chatroom/new" role="button">Criar nova sala</a>
+

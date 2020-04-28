@@ -8,7 +8,17 @@ const chatroomSchema = new Schema({
     },
     description: {
         type: String
-    }
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
+    members: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "users"
+        }
+    ]
 });
 
 mongoose.model("chatrooms", chatroomSchema)
