@@ -81,9 +81,4 @@ const app = express();
     app.use("/message", message);
 
 
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true}));
-
-
 module.exports = app
