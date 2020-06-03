@@ -15,7 +15,7 @@ exports.send = (req, res) => {
 
     newMessage.save().then().catch((err) => {
         req.flash("error_msg", "Houve um erro ao enviar a mensagem")
-        res.redirect("/user/chatrooms)
+        res.redirect("/user/chatrooms")
     })
 
 }

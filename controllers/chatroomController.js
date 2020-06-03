@@ -79,9 +79,14 @@ exports.addMember = (req, res) => {
 exports.renderRoom =  (req, res) => {  
 
     Chatroom.findOne({_id: req.params.id}).then((room) => {
-
+        
         if(room){
-            res.render("chatroom/index", {room_id: room._id, user_id: req.user._id, username: req.user.name})
+            if(room.members.includes(req.user._id)){
+                console.log("entro")
+                res.render("chatroom/index", {room_id: room._id, user_id: req.user._id, username: req.user.name})
+            } else {
+                res.redirect("/user/chatrooms")
+            }
         } else {
             req.flash("error_msg", "Essa sala não existe!")
             res.redirect("/user/chatrooms")
@@ -89,6 +94,7 @@ exports.renderRoom =  (req, res) => {
 
     }).catch((err) => {
         req.flash("error_msg", "Houve um erro ao procurar a sala.")
+        console.log(err)
         res.redirect("/user/chatrooms")
     })
 
