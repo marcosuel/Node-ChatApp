@@ -1,10 +1,20 @@
 <div class="card mt-4">
     <div class="card-body">
 
-        <!-- Botão para acionar modal -->
+        <div class="dropdown">
+            <button class="fa fa-bars fa-lg mb-2 btn-borderless float-right" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item" type="button" data-toggle="modal" data-target="#addMember-modal">
+                Adicionar novo membro
+                </button>
+                <button class="dropdown-item" type="button">Abandonar a sala</button>
+            </div>
+        </div>
+
+        <!-- Botão para acionar modal 
         <button type="button" class="btn btn-secondary btn-block mb-2" data-toggle="modal" data-target="#addMember-modal">
         Adicionar novo membro
-        </button>
+        </button>-->
 
         <!-- Modal -->
         <div class="modal fade" id="addMember-modal" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
@@ -55,7 +65,7 @@
         </div>
         -->
 
-        <div class="row">
+        <div class="row clear">
             <!-- Grid column -->
             <div class="col">
 

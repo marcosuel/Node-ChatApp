@@ -7,6 +7,16 @@
     clear:both;
 }
 
+.btn-borderless {
+    background: none;
+    border: none;
+    border-radius: 3px;
+}
+
+.btn-borderless:focus {
+    outline: none;
+}
+
 .message {
     padding: 5px 20px 5px 5px;
     border-radius: 5px;
