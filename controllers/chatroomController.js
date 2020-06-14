@@ -76,13 +76,48 @@ exports.addMember = (req, res) => {
 
 }
 
+exports.rmMember = (req, res) => {
+
+    Chatroom.findOne({_id: req.params.id}).then((chat) => {
+        if(chat){
+            User.findOne(req.user._id).then((user) => {
+                if(user) {
+                    if(chat.members.includes(user._id)){
+                        chat.updateOne({$pull: {members: user._id}}).then(() =>{
+                            req.flash("success_msg", "Você abandonou a sala!")
+                            res.redirect("/user/chatrooms")
+                        }).catch((err) => {
+                            req.flash("error_msg", "Houve um erro ao sair da sala.")
+                            res.redirect("/chatroom/in/"+req.params.id)
+                        })
+                    }
+                } else {
+                    req.flash("error_msg", "Usuário não encontrado.")
+                    res.redirect("/chatroom/in/"+req.params.id)
+                }
+            }).catch((err) => {
+                req.flash("error_msg", "Houve um erro ao buscar o usuário.")
+                res.redirect("/chatroom/in/"+req.params.id)
+            })
+
+        } else {
+            req.flash("error_msg", "Esta sala não existe!")
+            res.redirect("/user/chatrooms")
+        }
+    }).catch((err) => {
+        req.flash("error_msg", "Houve um erro ao buscar a sala")
+        console.log(err)
+        res.redirect("/user/chatrooms")
+    })
+
+}
+
 exports.renderRoom =  (req, res) => {  
 
     Chatroom.findOne({_id: req.params.id}).then((room) => {
         
         if(room){
             if(room.members.includes(req.user._id)){
-                console.log("entro")
                 res.render("chatroom/index", {room_id: room._id, user_id: req.user._id, username: req.user.name})
             } else {
                 res.redirect("/user/chatrooms")

@@ -7,7 +7,11 @@
                 <button class="dropdown-item" type="button" data-toggle="modal" data-target="#addMember-modal">
                 Adicionar novo membro
                 </button>
-                <button class="dropdown-item" type="button">Abandonar a sala</button>
+
+
+                <form action="/chatroom/in/{{room_id}}/rmMember" method="POST" id="rmMember-form">
+                    <button type="submit" class="dropdown-item text-danger">Abandonar Sala</button>
+                </form>
             </div>
         </div>
 

@@ -17,6 +17,7 @@ router.get("/new", checkAuthenticaded, (req, res) => {
 
 router.post("/new", checkAuthenticaded, chatroomController.createChatroom)
 router.post("/in/:id/addMember", checkAuthenticaded, chatroomController.addMember)
+router.post("/in/:id/rmMember", checkAuthenticaded, chatroomController.rmMember)
 
 
 module.exports = router
