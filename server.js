@@ -58,7 +58,7 @@ io.on('connection', socket => {
 
 
 
-const PORT = 8081
+const PORT = 8080
 
 server.listen(PORT, () => {
     console.log("Server listen on port "+PORT)
